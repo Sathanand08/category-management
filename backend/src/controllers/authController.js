@@ -51,7 +51,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
 
   if (!email || !password) {
     res.status(400);
-    throw new Error('Please provide email and password');
+    return res.json({ message: 'Please provide email and password' });
   }
 
   const user = await User.findOne({ email }).select('+password');
@@ -66,7 +66,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(401);
-    throw new Error('Invalid email or password');
+    return res.json({ message: 'Invalid email or password' });
   }
 });
 
